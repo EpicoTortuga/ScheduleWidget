@@ -1,0 +1,214 @@
+// Feel free to send any questions/suggestions to my Instagram: Ben.tastic_
+
+// Version 1.0.0
+// Coming soon: Image backgrounds
+
+/* ---------------------- */
+/* Customize your widget! */
+/* ---------------------- */
+
+// Feel free to edit these example schedules however you want, or even create your own! Just make sure that every schedule has the DAY START and DAY END values, the widget needs these to run correctly.
+
+var Odd = {
+  "DAY START":"0:00",
+  "Period 1":"9:00",
+  "Period 3":"10:05",
+  "Lunch":"11:05",
+  "Period 5":"11:40",
+  "Period 7":"12:45",
+  "School End":"13:45",
+  "DAY END":"24:00"
+}
+var Even = {
+  "DAY START":"0:00",
+  "Period 1":"9:00",
+  "Period 3":"10:05",
+  "Lunch":"11:05",
+  "Period 5":"11:40",
+  "Period 7":"12:45",
+  "School End":"13:45",
+  "DAY END":"24:00"
+}
+var Wed = {
+  "DAY START":"0:00",
+  "Period 1":"9:07",
+  "Period 2":"9:45",
+  "Period 3":"10:23",
+  "Period 4":"11:01",
+  "Lunch":"11:34",
+  "Period 5":"12:04",
+  "Period 6":"12:42",
+  "Period 7":"13:20",
+  "Period 8":"13:58",
+  "School End":"14:31",
+  "DAY END":"24:00"
+}
+
+// Set each schedule here, but make sure you write the exact names that you set for the schedule variables. Sunday and Monday should be kept at null.
+
+var dayTypes = {
+  0:null, //Sunday
+  1:Odd, //Monday
+  2:Even, //Tuesday
+  3:Wed, //Wednesday
+  4:Odd, //Thursday
+  5:Even, //Friday
+  6:null //Saturday
+};
+
+// Set the widget colors! Use any hex code you'd like.
+
+var widgetConfig = {
+  "WeekendLeftColor":"#c579d1",
+  "WeekendRightColor":"#52005e",
+  "WeekendTextColor":"#ffffff",
+  
+  "BeforeAfterColor":"#292826",
+  "BeforeAfterText":"#f9d342",
+  
+  "ClassLeftColor":"#779bd1",
+  "ClassRightColor":"#222233",
+  "ClassTextColor":"#ffffff"
+}
+
+
+// END OF CUSTOMIZATION
+
+/* ------------------- */
+/* Find Current Period */
+/* ------------------- */
+
+const today = new Date();
+
+var TodaySchedule = dayTypes[today.getDay()];
+
+var classes = [];
+var periods = [];
+
+function dateFromTime(time) {
+  let splitText = time.split(':');
+  let date = new Date();
+  date.setHours(splitText[0],splitText[1],0);
+  return date;
+}
+
+for (i in TodaySchedule) {
+ classes.push(dateFromTime(TodaySchedule[i]));
+  periods.push(i);
+}
+
+var currentPeriod;
+
+for (i in classes) {
+  if (i !== 0 && today >= classes[i-1] && today <= classes[i]) {
+    currentPeriod = i-1;
+    break;
+  }
+}
+
+
+/* --------------- */
+/* Draw Background */
+/* --------------- */
+
+function drawBackground(percentage, leftColor, rightColor) {
+  const size = new Size(200,200);
+  const c = new DrawContext();
+  c.size = size
+  c.respectScreenScale = true
+  
+  c.setFillColor(new Color(rightColor))
+  c.fill(new Rect(0,0,size.width,size.height))
+  
+  c.setFillColor(new Color(leftColor))
+  c.fill(new Rect(0,0,size.width*percentage,size.height))
+  return c.getImage();
+}
+
+var relativeDate = new RelativeDateTimeFormatter()
+
+/* ----------------- */
+/* Set Widget Params */
+/* ----------------- */
+
+if (TodaySchedule === null) {
+  
+  // Runs on weekends
+  
+  if (today.getDay() === 0) {var back=1;var fwrd=0;} else {var back=0;var fwrd=1;}
+  var start = (new Date()).setHours(0,0,0)
+  var end = (new Date()).setHours(24,0,0)
+  start = new Date(start-(24*3600*1000*back))
+  end = new Date(end+(24*3600*1000*fwrd))
+  
+  var percentage = ((today-start)/60000) / ((end-start)/60000);
+  
+  var topText = ""
+  var topColor = widgetConfig["WeekendTextColor"]
+  var bigText = "Weekend"
+  var bigColor = widgetConfig["WeekendTextColor"]
+  var smallText = "Ends " +relativeDate.string(end, today)
+  var smallColor = widgetConfig["WeekendTextColor"]
+  var background = drawBackground(percentage, widgetConfig["WeekendLeftColor"], widgetConfig["WeekendRightColor"])
+  
+} else if (periods[currentPeriod] == "DAY START") {
+  
+  // Runs at start of day
+  
+  var topText = ""
+  var topColor = widgetConfig["BeforeAfterText"]
+  var bigText = "School starts"
+  var bigColor = widgetConfig["BeforeAfterText"]
+  var smallText = relativeDate.string(classes[currentPeriod+1], today)
+  var smallColor = widgetConfig["BeforeAfterText"]
+  var background = drawBackground(0,widgetConfig["BeforeAfterColor"],widgetConfig["BeforeAfterColor"])
+  
+} else if (periods[currentPeriod+1] == "DAY END") {
+  
+  //Runs at end of day
+  
+  var topText = ""
+  var topColor = widgetConfig["BeforeAfterText"]
+  var bigText = "Done for today!"
+  var bigColor = widgetConfig["BeforeAfterText"]
+  var smallText = ""
+  var smallColor = widgetConfig["BeforeAfterText"]
+  var background = drawBackground(0,widgetConfig["BeforeAfterColor"],widgetConfig["BeforeAfterColor"])
+  
+} else {
+  
+  //Runs between regular periods
+  
+  var percentage = ((today-classes[currentPeriod])/60000) / ((classes[currentPeriod+1]-classes[currentPeriod])/60000)
+  
+  var topText = TodaySchedule[periods[currentPeriod]] + " - " + TodaySchedule[periods[currentPeriod+1]]
+  var topColor = widgetConfig["ClassTextColor"]
+  var bigText = periods[currentPeriod]
+  var bigColor = widgetConfig["ClassTextColor"]
+  var smallText = "Ends "+relativeDate.string(classes[currentPeriod+1], today)
+  var smallColor = widgetConfig["ClassTextColor"]
+  var background = drawBackground(percentage, widgetConfig["ClassLeftColor"], widgetConfig["ClassRightColor"])
+  
+}
+
+/* --------------- */
+/* Assemble Widget */
+/* --------------- */
+
+let w = new ListWidget()
+  w.backgroundImage = background
+  if (smallText === "") {w.addSpacer(15)}
+  let topTxt = w.addText(topText)
+  topTxt.textColor = new Color(topColor);
+  topTxt.font = Font.semiboldRoundedSystemFont(8)
+  if (topTxt !== "") {w.addSpacer(3)}
+  let titleTxt = w.addText(bigText)
+  titleTxt.textColor = new Color(bigColor);
+  titleTxt.font = Font.boldRoundedSystemFont(24)
+  if (smallText !== "") {w.addSpacer(5)}
+  let subTxt = w.addText(smallText)
+  subTxt.textColor = new Color(smallColor)
+  subTxt.textOpacity = 1
+  subTxt.font = Font.mediumRoundedSystemFont(18)
+
+Script.setWidget(w)
