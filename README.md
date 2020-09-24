@@ -2,6 +2,8 @@
 
 This widget can keep track of your school schedule! With fully customizable schedules and text, it's an extremely useful addition to your home screen. 
 
+**Current Version:** 1.0.0
+
 ## How to download
 
 1. Download the Scriptables app 
