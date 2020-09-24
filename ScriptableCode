@@ -1,7 +1,7 @@
 // Feel free to send any questions/suggestions to my Instagram: Ben.tastic_
 
 // Version 1.0.0
-// Coming soon: Image backgrounds
+// Coming soon (maybe): Image backgrounds
 
 /* ---------------------- */
 /* Customize your widget! */
@@ -44,7 +44,7 @@ var Wed = {
   "DAY END":"24:00"
 }
 
-// Set each schedule here, but make sure you write the exact names that you set for the schedule variables. Sunday and Monday should be kept at null.
+// Set each schedule here, but make sure you write the exact names that you set for the schedule variables. The weekend should be kept at null.
 
 var dayTypes = {
   0:null, //Sunday
@@ -126,6 +126,11 @@ function drawBackground(percentage, leftColor, rightColor) {
 }
 
 var relativeDate = new RelativeDateTimeFormatter()
+var formatDate = new DateFormatter()
+formatDate.useNoDateStyle()
+formatDate.useShortTimeStyle()
+
+var extraSpacer = 0
 
 /* ----------------- */
 /* Set Widget Params */
@@ -143,7 +148,7 @@ if (TodaySchedule === null) {
   
   var percentage = ((today-start)/60000) / ((end-start)/60000);
   
-  var topText = ""
+  var topText = formatDate.string(today)
   var topColor = widgetConfig["WeekendTextColor"]
   var bigText = "Weekend"
   var bigColor = widgetConfig["WeekendTextColor"]
@@ -155,7 +160,7 @@ if (TodaySchedule === null) {
   
   // Runs at start of day
   
-  var topText = ""
+  var topText = formatDate.string(today)
   var topColor = widgetConfig["BeforeAfterText"]
   var bigText = "School starts"
   var bigColor = widgetConfig["BeforeAfterText"]
@@ -167,13 +172,14 @@ if (TodaySchedule === null) {
   
   //Runs at end of day
   
-  var topText = ""
+  var topText = formatDate.string(today)
   var topColor = widgetConfig["BeforeAfterText"]
-  var bigText = "Done for today!"
+  var bigText = "School's over!"
   var bigColor = widgetConfig["BeforeAfterText"]
   var smallText = ""
   var smallColor = widgetConfig["BeforeAfterText"]
   var background = drawBackground(0,widgetConfig["BeforeAfterColor"],widgetConfig["BeforeAfterColor"])
+  var extraSpacer = 10
   
 } else {
   
@@ -181,7 +187,7 @@ if (TodaySchedule === null) {
   
   var percentage = ((today-classes[currentPeriod])/60000) / ((classes[currentPeriod+1]-classes[currentPeriod])/60000)
   
-  var topText = TodaySchedule[periods[currentPeriod]] + " - " + TodaySchedule[periods[currentPeriod+1]]
+  var topText = formatDate.string(classes[currentPeriod]) + " - " + formatDate.string(classes[currentPeriod+1])
   var topColor = widgetConfig["ClassTextColor"]
   var bigText = periods[currentPeriod]
   var bigColor = widgetConfig["ClassTextColor"]
@@ -197,18 +203,23 @@ if (TodaySchedule === null) {
 
 let w = new ListWidget()
   w.backgroundImage = background
-  if (smallText === "") {w.addSpacer(15)}
+  w.addSpacer(0 + extraSpacer)
   let topTxt = w.addText(topText)
   topTxt.textColor = new Color(topColor);
   topTxt.font = Font.semiboldRoundedSystemFont(8)
-  if (topTxt !== "") {w.addSpacer(3)}
+  w.addSpacer(2)
   let titleTxt = w.addText(bigText)
   titleTxt.textColor = new Color(bigColor);
   titleTxt.font = Font.boldRoundedSystemFont(24)
+  w.addSpacer(3)
   if (smallText !== "") {w.addSpacer(5)}
   let subTxt = w.addText(smallText)
   subTxt.textColor = new Color(smallColor)
   subTxt.textOpacity = 1
   subTxt.font = Font.mediumRoundedSystemFont(18)
+
+if (!config.runsInWidget) {
+  w.presentSmall()
+}
 
 Script.setWidget(w)
