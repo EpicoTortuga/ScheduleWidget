@@ -12,34 +12,34 @@
 var Odd = {
   "DAY START":"0:00",
   "Period 1":"9:00",
-  "Period 3":"10:05",
+  "Period 3":"10:00",
   "Lunch":"11:05",
-  "Period 5":"11:40",
-  "Period 7":"12:45",
+  "Period 5":"11:35",
+  "Period 7":"12:40",
   "School End":"13:45",
   "DAY END":"24:00"
 }
 var Even = {
   "DAY START":"0:00",
   "Period 1":"9:00",
-  "Period 3":"10:05",
+  "Period 3":"10:00",
   "Lunch":"11:05",
-  "Period 5":"11:40",
-  "Period 7":"12:45",
+  "Period 5":"11:35",
+  "Period 7":"12:40",
   "School End":"13:45",
   "DAY END":"24:00"
 }
 var Wed = {
   "DAY START":"0:00",
-  "Period 1":"9:07",
-  "Period 2":"9:45",
-  "Period 3":"10:23",
-  "Period 4":"11:01",
+  "Period 1":"9:05",
+  "Period 2":"9:40",
+  "Period 3":"10:18",
+  "Period 4":"10:56",
   "Lunch":"11:34",
   "Period 5":"12:04",
-  "Period 6":"12:42",
-  "Period 7":"13:20",
-  "Period 8":"13:58",
+  "Period 6":"12:37",
+  "Period 7":"13:15",
+  "Period 8":"13:53",
   "School End":"14:31",
   "DAY END":"24:00"
 }
