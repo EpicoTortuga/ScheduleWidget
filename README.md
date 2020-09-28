@@ -1,4 +1,4 @@
-<a href="url"><img src="https://github.com/EpicoTortuga/ScheduleWidget/blob/master/README%20Images/ScheduleTrackerTitle.PNG" align="center" height="90%" width="90%" ></a>
+<a href="url"><img src="https://github.com/EpicoTortuga/ScheduleWidget/blob/master/README%20Images/ScheduleTrackerTitle.PNG" align="center" height="80%" width="80%" ></a>
 
 # Schedule Tracker by @ben.tastic_
 
