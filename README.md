@@ -1,10 +1,12 @@
-# Schedule Widget by @ben.tastic_
+<a href="url"><img src="https://github.com/EpicoTortuga/ScheduleWidget/blob/master/README%20Images/ScheduleTrackerTitle.PNG" align="center" height="70%" width="70%" ></a>
 
-This widget can keep track of your school schedule! With fully customizable schedules and text, it's an extremely useful addition to your home screen. 
+# Schedule Tracker by @ben.tastic_
+
+This widget can keep track of your school schedule! With fully customizable schedules and text, it's an extremely useful addition to your home screen.
 
 **Current Version:** 1.0.0
 
-## How to download
+# How to download
 
 1. Download the Scriptables app 
 2. Create a new script
@@ -14,6 +16,8 @@ This widget can keep track of your school schedule! With fully customizable sche
 
 That's it! Your widget should be completely ready.
 
-## Thank you!
+<a href="url"><img src="https://github.com/EpicoTortuga/ScheduleWidget/blob/master/README%20Images/ScheduleTrackerExamples.PNG" align="center" height="70%" width="70%" ></a>
+
+# Thank you!
 
 Please send any suggestions or questions to my Instagram, @ben.tastic_
