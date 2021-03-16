@@ -6,7 +6,7 @@ This widget can keep track of your school schedule! With fully customizable sche
 
 **Current Version:** 1.0.0
 
-**UPDATE:** The new purple and teal weeks are very confusing! I have updated this widget to automatically change between and clearly display purple and teal weeks.
+**UPDATE:** The new purple and teal weeks are very confusing! I have updated this widget with full purple and teal week support.
 
 # How to download
 
