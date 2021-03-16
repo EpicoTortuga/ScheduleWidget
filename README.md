@@ -6,13 +6,16 @@ This widget can keep track of your school schedule! With fully customizable sche
 
 **Current Version:** 1.0.0
 
+**UPDATE:** The new purple and teal weeks are very confusing! I have updated this widget to automatically change between and clearly display purple and teal weeks.
+
 # How to download
 
 1. Download the Scriptables app 
 2. Create a new script
 3. Copy-paste everything on [this page](https://github.com/EpicoTortuga/ScheduleWidget/blob/master/WidgetCode) (for regular schedule), or on [this page](https://github.com/EpicoTortuga/ScheduleWidget/blob/master/WidgetCode-PurpleTeal) (for purple/teal schedule) into a new script.
-4. *(Optional)* Edit the beginning part of the script to the preferences you prefer.
-5. Add a widget to your home screen and set it to the script you just created.
+4. **Note:** the purple/teal widget will only work for the currently announced weeks. It will not work before, or after, these days. I will regularily update the widget to keep up with schedule announcements. Contact me, or follow my Instagram, to know when you should change out your widget code!
+5. *(Optional)* Edit the beginning part of the script to the preferences you prefer.
+6. Add a widget to your home screen and set it to the script you just created.
 
 That's it! Your widget should be completely ready.
 
