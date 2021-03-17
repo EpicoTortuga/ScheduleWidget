@@ -2,7 +2,7 @@
 
 # Schedule Tracker by @ben.tastic_
 
-This widget can keep track of your school schedule! With fully customizable schedules and text, it's an extremely useful addition to your home screen.
+This widget can keep track of your school schedule! With fully customizable schedules and text, it's a useful addition to your home screen.
 
 **Current Version:** 1.0.0
 
