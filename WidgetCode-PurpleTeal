@@ -221,7 +221,7 @@ if (TodaySchedule === null) {
   
   var topText = formatDate.string(today)
   var topColor = widgetConfig[currentWeek+"BeforeAfterText"]
-  var bigText = "School starts"
+  var bigText = periods[currentPeriod+1] + " starts"
   var bigColor = widgetConfig[currentWeek+"BeforeAfterText"]
   var smallText = relativeDate.string(classes[currentPeriod+1], today)
   var smallColor = widgetConfig[currentWeek+"BeforeAfterText"]
@@ -250,7 +250,12 @@ if (TodaySchedule === null) {
   var topColor = widgetConfig[currentWeek+"ClassTextColor"]
   var bigText = periods[currentPeriod]
   var bigColor = widgetConfig[currentWeek+"ClassTextColor"]
-  var smallText = "Ends "+relativeDate.string(classes[currentPeriod+1], today)
+  if (Math.floor((classes[currentPeriod+1] - today - 3600000)/60000) > 0) {
+      var extraTime = " and " + Math.floor((classes[currentPeriod+1]-today-3600000)/60000) + " mins"
+  } else {
+      var extraTime = ""
+    }
+  var smallText = "Ends "+relativeDate.string(classes[currentPeriod+1], today) + extraTime
   var smallColor = widgetConfig[currentWeek+"ClassTextColor"]
   var background = drawBackground(percentage, widgetConfig[currentWeek+"ClassLeftColor"], widgetConfig[currentWeek+"ClassRightColor"])
   
@@ -275,7 +280,7 @@ let w = new ListWidget()
   let subTxt = w.addText(smallText)
   subTxt.textColor = new Color(smallColor)
   subTxt.textOpacity = 1
-  subTxt.font = Font.mediumRoundedSystemFont(18)
+  subTxt.font = Font.mediumRoundedSystemFont(16)
 
 if (!config.runsInWidget) {
   w.presentSmall()
